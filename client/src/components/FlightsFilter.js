@@ -125,12 +125,12 @@ export default class FlightsFilter extends Component {
 
         var params = {
             origin: { 
-                code: selectedOriginOption.value,
-                name: selectedOriginOption.label
+                code: selectedOriginOption !== null ? selectedOriginOption.value : null,
+                name: selectedOriginOption !== null ? selectedOriginOption.label : null
             },
             destination: {
-                code: selectedDestinationOption.value,
-                name: selectedDestinationOption.label
+                code: selectedDestinationOption !== null ? selectedDestinationOption.value : null,
+                name: selectedDestinationOption !== null ? selectedDestinationOption.label : null
             },
             yearFrom: selectedYearFromOption !== null ? selectedYearFromOption.value : null,
             yearTo: selectedYearToOption !== null ? selectedYearToOption.value : null,
@@ -146,6 +146,20 @@ export default class FlightsFilter extends Component {
         }
         else {
             params.airline = null
+        }
+
+        var warningText1 = document.getElementById("warningOrigin");
+        var warningText2 = document.getElementById("warningDest");
+        if (selectedOriginOption !== null && selectedDestinationOption !== null){
+            warningText1.style.display = "none";
+            warningText2.style.display = "none";
+        }else {
+            warningText1.style.display = "block";
+            warningText1.style.color = "red";
+            warningText1.style.fontSize = "80%";
+            warningText2.style.display = "block";
+            warningText2.style.color = "red";
+            warningText2.style.fontSize = "80%";
         }
 
         this.props.executeSearch(params);
@@ -183,12 +197,14 @@ export default class FlightsFilter extends Component {
                         <td>
                             <div className="form-section">
                                 <p>Origin</p>
+                                <p id="warningOrigin" style={{display: "none"}}>*required field</p>
                                 {this.renderAirportOptions(this.state.selectedOriginOption,this.handleOriginChange)}
                             </div>
                         </td>
                         <td>
                             <div className="form-section">
                                 <p>Destination</p>
+                                <p id="warningDest" style={{display: "none"}}>*required field</p>
                                 {this.renderAirportOptions(this.state.selectedDestinationOption,this.handleDestinationChange)}
                             </div>
                         </td>
