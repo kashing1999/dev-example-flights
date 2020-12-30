@@ -87,8 +87,13 @@
 |UI10|User Interaction|Input null data.|1. Click the search button without any input.| An error message will be displayed letting the user know not to leave the field as null.|Success|Correctness<br />Maintainability|Direct,<br />Internal|-|
 
 ## Bug Report
-| Test ID | Actual Output | Fixing Steps | Results After Bug Fixing |
+| Test ID | Actual Output | Fixing Steps | Results After Fixing |
 | :-      | :-            | :-           | :-                       |
-| SYS02 | The web application crashed with an error "Unhandled Rejection (TypeError): Cannot read property 'value' of null" cause by null reference if no origin or destiniation specidy in the filter | 1. Debug and find the code where null reference happens<br>2. Modify the code by adding null handler for origin and destination variable such as: <br>`code: selectedOriginOption !== null ? selectedOriginOption.value : null, name: selectedOriginOption !== null ? selectedOriginOption.label : null` <br>`code: selectedDestinationOption !== null ? selectedDestinationOption.value : null, name: selectedDestinationOption !== null ? selectedDestinationOption.label : null` <br>3. Add a warning message if origin and destination are null | 1. The web application does not crash if the origin or destination are not specify<br>2. A warning message "*requried filled" is spawned to remind the user to specify origin and destination |
+|API05|Server hangs and nothing is sent back as output|Add a check if parameters are NULL or undefined|Returns empty JSON object|
+|API09|Server hangs and nothing is sent back as output|Add a check if parameters are NULL or undefined|Returns empty JSON object|
+|API10|Nothing is sent back as output|Check if the given number is Nan, if so return json object|Returns empty JSON object|
+|API13|Server hangs and nothing is sent back as output|Add a check if parameters are NULL or undefined|Returns empty JSON object|
+|API14|Gives null for everything|Check if the given number is NaN, if so return empty json object|Returns empty JSON ojbect|
+| SYS02 | The web application crashed with an error "Unhandled Rejection (TypeError): Cannot read property 'value' of null" cause by null reference if no origin or destiniation specified in the filter | 1. Debug and find the code where null reference happens<br>2. Modify the code by adding null handler for origin and destination variable such as: <br>`code: selectedOriginOption !== null ? selectedOriginOption.value : null, name: selectedOriginOption !== null ? selectedOriginOption.label : null` <br>`code: selectedDestinationOption !== null ? selectedDestinationOption.value : null, name: selectedDestinationOption !== null ? selectedDestinationOption.label : null` <br>3. Add a warning message if origin and destination are null | 1. The web application does not crash if the origin or destination are not specify<br>2. A warning message "*requried filled" is spawned to remind the user to specify origin and destination |
 | UI01 | The UI componenets do not adjust according to the smaller screen size |-|-|
 | UI04 | When the window size is reduced the UI components do not adjust |-|-|
